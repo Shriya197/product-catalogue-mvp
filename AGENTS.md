@@ -14,10 +14,9 @@ The client has been burned by throwaway PoCs. Every layer must have clean bounda
 2. **Domain Normalization:** Never leak raw Fake Store API shapes to the frontend. Map external responses into our own canonical `Product` domain model inside the adapter layer.
 3. **Repository/Adapter Pattern (Data Source):**
    - Define a `ProductRepository` interface (`getAll()`, `getById(id)`, `getCategories()`).
-   - Implement `FakeStoreProductRepository` behind that interface with an in-memory TTL cache (so Fake Store latency/rate-limits don't degrade UX or tests).
    - Business logic (ranking "top rated", filtering by category, searching) lives in `ProductService`, completely decoupled from where products come from.
 4. **Provider Pattern (Email):**
    - Define an `EmailProvider` interface (`sendEnquiry(payload)`).
-   - Implement `ConsoleEmailProvider` (or Nodemailer Ethereal/SMTP via env vars) so reviewers need zero external accounts to test locally.
+   - Implement `ConsoleEmailProvider` so reviewers need zero external accounts to test locally.
 5. **Validation & Error Handling:** Validate all incoming API params and POST bodies (enquiry form) using Zod. Return consistent JSON error envelopes `{ error: { code, message, details? } }`.
 6. **Code Discipline:** Keep functions small, strongly typed (no `any`), and write unit/integration tests for every critical path. Do not over-engineer features outside the 5 acceptance criteria.
