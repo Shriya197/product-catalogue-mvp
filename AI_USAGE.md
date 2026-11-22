@@ -23,7 +23,7 @@
 
 ## 5. Where the AI Got Something Wrong & How I Caught It
 
-I reviewed each diff and reran typechecking, automated tests, and the production build after changes. These were the concrete issues found and fixed:
+I reviewed every git diff across each phase, manually verified the UI and end-to-end product catalogue flows in the browser (checking network requests, category grouping, search, and enquiry submission), and reran typechecking, automated tests, and the production build after every change. These were the concrete issues found and fixed:
 
 - **Header search input drifted out of sync with navigation:** Typing a search worked, but navigating to a different search URL or leaving search could leave stale text in the header input. I fixed `Layout.tsx` to derive the active query from `useLocation()` + `URLSearchParams`, sync the input in an effect, and clear it on non-search routes. Added a regression test for navigation sync and reset.
 - **Whitespace-only searches still reached the query layer:** `useSearchProducts` used the raw query for both the React Query key and API request. I normalized with `trim()` once, used the normalized value for both, and kept the query disabled when it was empty. Added tests confirming a padded query requests `backpack` and a whitespace-only query makes no request.
@@ -39,6 +39,6 @@ I reviewed each diff and reran typechecking, automated tests, and the production
 - **Building (Backend, Tests & React Frontend via `opencode`):** ~2 hr 15 mins
 - **Manual Review, Bug Fixes & Edge-Case Testing:** ~30 mins
 - **Documentation (`DECISION.md`, `AI_USAGE.md`) & Final Validation:** ~25 mins
-- **Total:** ~3 hrs 35 mins (within the 2–3 hour time-box)
+- **Total:** ~3 hrs 35 mins (approx the 2–3 hour time-box)
 
 **Known validation gaps:**SMTP delivery was not exercised; the console provider path was verified.
