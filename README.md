@@ -97,4 +97,4 @@ The suite uses Vitest + Supertest for the backend and Vitest + React Testing Lib
 
 Errors use the consistent envelope `{ "error": { "code": "…", "message": "…" } }`.
 
-For a feature-by-feature explanation of the code, see `ARCHITECTURE_WALKTHROUGH.md`. For deeper rationale, see `DECISION.md` and `AI_USAGE.md`.
+For deeper rationale, see `DECISION.md` and `AI_USAGE.md`.
